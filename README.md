@@ -1,12 +1,13 @@
-# Ansible role `ROLENAME`
+# Ansible role `Pound`
 
-An Ansible role for PURPOSE. Specifically, the responsibilities of this role are to:
+An Ansible role for POUND. Specifically, the responsibilities of this role are to:
+Loabalance traffic over webservers
 
 -
 
 ## Requirements
 
-No specific requirements
+x Running webservers
 
 ## Role Variables
 
@@ -42,5 +43,6 @@ Pull requests are also very welcome. The best way to submit a PR is by first cre
 
 ## Contributors
 
-- [Bert Van Vreckem](https://github.com/bertvv/) (maintainer)
+- [Jens Neirynck](https://github.com/JensNeirynck/) (maintainer)
+- [Bert Van Vreckem](https://github.com/bertvv/)
 
