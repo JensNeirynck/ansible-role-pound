@@ -1,0 +1,22 @@
+ListenHTTP
+    Address {{Pound_LoadBalancerHTTPIP}}
+    Port {{Pound_LoadBalancerHTTPPort}}
+End
+
+ListenHTTPS
+    Address {{Pound_LoadBalancerHTTPSIP}}
+    Port    {{Pound_LoadBalancerHTTPSPort}}
+    Cert    "/etc/pki/tls/certs/pound.pem"
+End
+
+Service
+    BackEnd
+        Address 192.168.1.5
+        Port    80
+    End
+
+    BackEnd
+        Address 192.168.1.6
+        Port    80
+    End
+End

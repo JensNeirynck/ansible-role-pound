@@ -4,12 +4,20 @@
   yum:
     name: epel-release
     state: present
-    
 - name: install Pound
   yum:
     name: Pound
     state: present
-
+- name: empty "/etc/pound.cfg"
+  blockinfile:
+    dest: "/etc/pound.cfg"
+    content: ""
+- name: configure Load balancer
+  blockinfile:
+    dest: "/etc/pound.cfg"
+    block: |
+      virtual_alias_maps = ldap:/etc/postfix/ldap-aliases.cf
+      local_recipient_maps = $alias_maps, ldap:/etc/postfix/ldap-users.cf
 - name: add HTTP & HTTPS to the firewall
   firewalld:
     service: "http"
