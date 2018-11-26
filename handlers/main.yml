@@ -5,3 +5,8 @@
   service:
     name: firewalld
     state: restarted
+
+- name: restart pound
+  service:
+    name: pound
+    state: restarted

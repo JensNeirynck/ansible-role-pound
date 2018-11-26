@@ -10,13 +10,12 @@ ListenHTTPS
 End
 
 Service
-    BackEnd
-        Address 192.168.1.5
-        Port    80
-    End
 
-    BackEnd
-        Address 192.168.1.6
-        Port    80
-    End
+array(
+   BackEnd
+     Address {{Pound_WebserverIP}}
+     Port {{Pound_WebserverPort}}
+   End
+ );
 End
+
