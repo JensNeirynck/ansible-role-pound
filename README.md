@@ -12,8 +12,8 @@ An Ansible role for POUND. Specifically, the responsibilities of this role are t
 
 | Variable   | Comments (type)  |
 | :---       | :---             |
-| `IPLB` | The IP that the loadbalancer listens on |
-| `PORTLB` | The port that the loadbalancer listens on |
+| `IPLoadBalancer` | The IP that the loadbalancer listens on |
+| `PORTLoadBalancer` | The port that the loadbalancer listens on |
 
 ## Dependencies
 
