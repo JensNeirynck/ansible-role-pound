@@ -1,22 +1,25 @@
 # roles/ROLENAME/tasks/main.yml
 ---
+- name: install EPEL
+  yum:
+    name: epel-release
+    state: present
+    
+- name: install Pound
+  yum:
+    name: Pound
+    state: present
 
-- include_vars: "{{ item }}"
-  with_first_found:
-    - "{{ ansible_distribution }}.yml"
-    - "{{ ansible_os_family }}.yml"
-  tags: ROLENAME
-
-- name: Install packages
-  package:
-    name: "{{ item }}"
-    state: installed
-  with_items: "{{ ROLENAME_packages }}"
-  tags: ROLENAME
-
-- name: Ensure service is started
-  service:
-    name: "{{ ROLENAME_service }}"
-    state: started
-    enabled: true
-  tags: ROLENAME
+- name: add HTTP & HTTPS to the firewall
+  firewalld:
+    service: "http"
+    permanent: true
+    state: enabled
+  with_items:
+    - dhcpv6-client
+    - ssh
+  notify:
+    - restart firewalld
+  tags:
+    - rhbase
+    - security

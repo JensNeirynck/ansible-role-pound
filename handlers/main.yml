@@ -1,7 +1,7 @@
 # roles/ROLENAME/handlers/main.yml
 ---
 
-- name: restart ROLENAME
+- name: restart firewalld
   service:
-    name: "{{ ROLENAME_service }}"
+    name: firewalld
     state: restarted
