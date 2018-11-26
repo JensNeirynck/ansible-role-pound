@@ -10,9 +10,10 @@ An Ansible role for POUND. Specifically, the responsibilities of this role are t
 ## Role Variables
 
 
-| Variable   | Default | Comments (type)  |
-| :---       | :---    | :---             |
-| `role_var` | -       | (scalar) PURPOSE |
+| Variable   | Comments (type)  |
+| :---       | :---             |
+| `IPLB` | The IP that the loadbalancer listens on |
+| `PORTLB` | The port that the loadbalancer listens on |
 
 ## Dependencies
 
