@@ -1,34 +1,68 @@
-# Ansible role `ROLENAME`
+# Ansible role `Pound`
 
-An Ansible role for PURPOSE. Specifically, the responsibilities of this role are to:
-
--
+An Ansible role for POUND. Specifically, the responsibilities of this role are to:
+ - Loabalance traffic over webservers
 
 ## Requirements
 
-No specific requirements
+ - Running webservers
 
 ## Role Variables
 
 
-| Variable   | Default | Comments (type)  |
-| :---       | :---    | :---             |
-| `role_var` | -       | (scalar) PURPOSE |
+| Variable   | Comments (type)  |
+| :---       | :---             |
+| `IPLoadBalancer` | The IP that the loadbalancer listens on |
+| `PORTLoadBalancer` | The port that the loadbalancer listens on |
 
 ## Dependencies
 
 No dependencies.
 
-## Example Playbook
+### Install EPEL
+```
+yum install epel-release
+yum install Pound
+```
 
-See the test playbooks in either the [Vagrant](https://github.com/bertvv/ansible-role-ROLENAME/blob/vagrant-tests/test.yml) or [Docker](https://github.com/bertvv/ansible-role-ROLENAME/blob/docker-tests/test.yml) test environment. See the section Testing for details.
+### Configure pound.cfg based on variables
+```
+echo "
+ListenHTTP
+    Address $IPLB
+    Port $PORTLB
+End
 
-## Testing
+ListenHTTPS
+    Address $IPLB
+    Port    $PORTLB
+    Cert    "/etc/pki/tls/certs/pound.pem"
+End
 
-There are two types of test environments available. One powered by Vagrant, another by Docker. The latter is suitable for running automated tests on Travis-CI. Test code is kept in separate orphan branches. For details of how to set up these test environments on your own machine, see the README files in the respective branches:
+Service
+    BackEnd
+        Address $IPWEB1
+        Port    $PORTWEB1
+    End
 
-- Vagrant: [vagrant-tests](https://github.com/bertvv/ansible-role-ROLENAME/tree/vagrant-tests)
-- Docker: [docker-tests](https://github.com/bertvv/ansible-role-ROLENAME/tree/docker-tests)
+    BackEnd
+        Address $IPWEBX
+        Port    $PORTWEBX
+    End
+End
+" >> /etc/pound.cfg
+
+```
+### Open http and https ports
+```
+firewall-cmd --add-service=http --permanent
+firewall-cmd --add-service=https --permanent
+```
+### Restart services
+```
+systemctl restart Pound
+systemctl restart firewalld
+```
 
 ## Contributing
 
@@ -42,5 +76,6 @@ Pull requests are also very welcome. The best way to submit a PR is by first cre
 
 ## Contributors
 
-- [Bert Van Vreckem](https://github.com/bertvv/) (maintainer)
+- [Jens Neirynck](https://github.com/JensNeirynck/) (maintainer)
+- [Bert Van Vreckem](https://github.com/bertvv/)
 
