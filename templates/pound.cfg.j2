@@ -10,23 +10,21 @@ ListenHTTPS
 End
 
 Service
-
 {% set _pound = {} %}
-{% set _ = _pound.update({'webservers': item.webservers|default([])}) %}
+{% set _ = _pound.update({'webservers': Webservers}) %}
 
 {% for webserver in _pound['webservers'] %}
-
-{% if host.ip is string %}
-Address {{ webserver.name.ljust(20) }}
-
-{% if host.port is string %}
-Port {{ webserver.port.ljust(20) }}
-
-{% if host.priority is string %}
-Priority {{ webserver.priority.ljust(20) }}
-
+BackEnd
+{% if webserver.ip is string %}
+    Address {{ webserver.ip.ljust(20) }}
+{% endif %}
+{% if webserver.port is string %}
+    Port {{ webserver.port.ljust(20) }}
+{% endif %}
+{% if webserver.priority is string %}
+    Priority {{ webserver.priority.ljust(20) }}
+{% endif %}
+End
 {% endfor %}
-
-
 End
 

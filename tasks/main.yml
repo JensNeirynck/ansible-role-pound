@@ -1,4 +1,4 @@
-# roles/ROLENAME/tasks/main.yml
+# roles/ansible-role-pound/tasks/main.yml
 ---
 - name: install EPEL
   yum:
