@@ -18,12 +18,8 @@ BackEnd
 {% if webserver.ip is string %}
     Address {{ webserver.ip.ljust(20) }}
 {% endif %}
-{% if webserver.port is string %}
-    Port {{ webserver.port.ljust(20) }}
-{% endif %}
-{% if webserver.priority is string %}
-    Priority {{ webserver.priority.ljust(20) }}
-{% endif %}
+    Port {{ webserver.port }}
+    Priority {{ webserver.priority}}
 End
 {% endfor %}
 End
